@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://h1r7utk8gtn2"]
+
+[ext_resource type="Texture2D" uid="uid://bksxumr55ahwh" path="res://Assets/Board.png" id="1_v3gex"]
+[ext_resource type="Script" path="res://Scripts/Player_2d.gd" id="2_t7nvd"]
+[ext_resource type="Script" path="res://Scenes/world_scene.gd" id="2_xiw4f"]
+[ext_resource type="Texture2D" uid="uid://b5o23nwu2aesa" path="res://Assets/Player.png" id="3_81la5"]
+[ext_resource type="Texture2D" uid="uid://b23kgirec6jvp" path="res://Assets/Computer.png" id="4_vwvk0"]
+[ext_resource type="Script" path="res://Scenes/Ball.gd" id="5_2pjcf"]
+[ext_resource type="Script" path="res://Scenes/Computer.gd" id="5_p80kc"]
+[ext_resource type="Texture2D" uid="uid://b1bkcgml3xc0o" path="res://Assets/Ball.png" id="6_i6b7f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oy2ng"]
+size = Vector2(18.3233, 119)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4wx5"]
+size = Vector2(18.3232, 119)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x01v8"]
+size = Vector2(803.889, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_teq0x"]
+size = Vector2(20, 453.909)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4mmm5"]
+radius = 15.276
+
+[node name="Board" type="Sprite2D"]
+position = Vector2(576, 318)
+scale = Vector2(1.44174, -1.40337)
+texture = ExtResource("1_v3gex")
+script = ExtResource("2_xiw4f")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(389.113, 0)
+script = ExtResource("2_t7nvd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_81la5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0.838348, -0.356293)
+shape = SubResource("RectangleShape2D_oy2ng")
+
+[node name="Computer" type="CharacterBody2D" parent="."]
+position = Vector2(-389.113, 0)
+script = ExtResource("5_p80kc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Computer"]
+texture = ExtResource("4_vwvk0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Computer"]
+position = Vector2(-0.838379, -0.356293)
+shape = SubResource("RectangleShape2D_j4wx5")
+
+[node name="Boundary" type="StaticBody2D" parent="."]
+position = Vector2(0, -236.574)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(0.346771, -0.712585)
+shape = SubResource("RectangleShape2D_x01v8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(0.346771, 474.573)
+shape = SubResource("RectangleShape2D_x01v8")
+
+[node name="GoalPost" type="StaticBody2D" parent="."]
+position = Vector2(411.308, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalPost"]
+light_mask = 2
+position = Vector2(-3.05176e-05, 0.356277)
+shape = SubResource("RectangleShape2D_teq0x")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GoalPost"]
+light_mask = 2
+position = Vector2(-821.923, 0.356277)
+shape = SubResource("RectangleShape2D_teq0x")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+visibility_layer = 3
+script = ExtResource("5_2pjcf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("6_i6b7f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_4mmm5")
+
+[node name="BallTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]

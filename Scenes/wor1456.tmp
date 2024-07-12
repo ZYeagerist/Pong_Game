@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://do1qleuow3ywr"]
+
+[ext_resource type="PackedScene" uid="uid://c1pby5i8diwco" path="res://Scenes/Player_2d.tscn" id="1_ncaae"]
+[ext_resource type="Script" path="res://Scripts/Player_2d.gd" id="2_735r2"]
+[ext_resource type="Texture2D" uid="uid://bksxumr55ahwh" path="res://Assets/Board.png" id="2_v5a86"]
+[ext_resource type="Texture2D" uid="uid://b23kgirec6jvp" path="res://Assets/Computer.png" id="4_4tteq"]
+[ext_resource type="Texture2D" uid="uid://b1bkcgml3xc0o" path="res://Assets/Ball.png" id="4_msyy3"]
+[ext_resource type="Script" path="res://Scenes/Ball.gd" id="5_umjs3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v22li"]
+size = Vector2(18.6707, 120.429)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdcxv"]
+size = Vector2(1392, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oo5w7"]
+radius = 15.0333
+
+[node name="WorldScene" type="Node2D"]
+position = Vector2(0, -1)
+
+[node name="Board" type="Sprite2D" parent="."]
+position = Vector2(498, -44)
+scale = Vector2(1.72996, 1.71055)
+texture = ExtResource("2_v5a86")
+
+[node name="Camera2D" type="Camera2D" parent="Board"]
+scale = Vector2(0.905115, 0.704185)
+zoom = Vector2(0.835, 0.835)
+
+[node name="Player" parent="Board" instance=ExtResource("1_ncaae")]
+z_index = 1
+position = Vector2(389.604, 25.7227)
+scale = Vector2(1, 1.012)
+script = ExtResource("2_735r2")
+
+[node name="Computer" type="CharacterBody2D" parent="Board"]
+position = Vector2(-390.76, -10.5229)
+
+[node name="Sprite2D" type="Sprite2D" parent="Board/Computer"]
+texture = ExtResource("4_4tteq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/Computer"]
+position = Vector2(-0.664658, -0.584602)
+shape = SubResource("RectangleShape2D_v22li")
+
+[node name="Goal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Goal"]
+position = Vector2(1224, -26)
+rotation = -1.5708
+scale = Vector2(1.01651, -3.31243)
+shape = SubResource("RectangleShape2D_bdcxv")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Goal"]
+position = Vector2(-228, -26)
+rotation = -1.5708
+scale = Vector2(1.01651, -3.31243)
+shape = SubResource("RectangleShape2D_bdcxv")
+
+[node name="Boundary" type="StaticBody2D" parent="."]
+position = Vector2(-8, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(506, -467)
+scale = Vector2(1.01651, -3.31243)
+shape = SubResource("RectangleShape2D_bdcxv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundary"]
+position = Vector2(506, 376)
+scale = Vector2(1.01651, -3.31243)
+shape = SubResource("RectangleShape2D_bdcxv")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(496, 0)
+script = ExtResource("5_umjs3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("4_msyy3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_oo5w7")
