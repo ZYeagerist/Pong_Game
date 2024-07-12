@@ -35,7 +35,7 @@ position = Vector2(389.113, 0)
 script = ExtResource("2_t7nvd")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(0.000169337, 0.712563)
+position = Vector2(0.000169337, 90.4965)
 texture = ExtResource("3_81la5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
