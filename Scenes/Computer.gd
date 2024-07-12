@@ -3,6 +3,10 @@ extends CharacterBody2D
 @export var speed = 200
 
 
+func new_player_position():
+	var reset_position = Vector2(-389, 0)
+
+
 func _physics_process(delta):
 	var input = Vector2()
 	 
