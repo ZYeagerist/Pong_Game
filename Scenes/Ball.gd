@@ -1,11 +1,16 @@
 extends CharacterBody2D
 
-var ball_speed = 200
+var ball_speed = 500
 var ball_accel = 50
 var speed : int
 var ball_movement : Vector2
+var MAX_Y_VECTOR : float = 0.6
+
 
 func _ready():
+	var sprite = $"../Player/Sprite2D"
+	var p_height = sprite.texture.get_height()
+	print(p_height)
 	new_ball()
 	
 
@@ -33,4 +38,8 @@ func _physics_process(delta):
 			ball_movement = ball_movement.bounce(collision.get_normal())
 		else:
 			ball_movement = ball_movement.bounce(collision.get_normal())
-	
+	if collider == $"../Computer":
+		$"../Computer".speed -= 10
+		print($"../Computer".speed)
+			
+

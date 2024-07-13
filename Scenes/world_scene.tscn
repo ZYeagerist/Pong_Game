@@ -1,12 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://h1r7utk8gtn2"]
+[gd_scene load_steps=16 format=3 uid="uid://h1r7utk8gtn2"]
 
 [ext_resource type="Texture2D" uid="uid://bksxumr55ahwh" path="res://Assets/Board.png" id="1_v3gex"]
 [ext_resource type="Script" path="res://Scripts/Player_2d.gd" id="2_t7nvd"]
 [ext_resource type="Script" path="res://Scenes/world_scene.gd" id="2_xiw4f"]
 [ext_resource type="Texture2D" uid="uid://b5o23nwu2aesa" path="res://Assets/Player.png" id="3_81la5"]
-[ext_resource type="Texture2D" uid="uid://b23kgirec6jvp" path="res://Assets/Computer.png" id="4_vwvk0"]
 [ext_resource type="Script" path="res://Scenes/Ball.gd" id="5_2pjcf"]
-[ext_resource type="Script" path="res://Scenes/Computer.gd" id="5_p80kc"]
+[ext_resource type="PackedScene" uid="uid://cx0b56k0jno3c" path="res://computer.tscn" id="5_q07eu"]
 [ext_resource type="AudioStream" uid="uid://bnl2xadvtaq6b" path="res://Sounds/254__noisecollector__pong-softsynth/4359__noisecollector__pongblipf4.wav" id="5_rplpl"]
 [ext_resource type="Texture2D" uid="uid://b1bkcgml3xc0o" path="res://Assets/Ball.png" id="6_i6b7f"]
 [ext_resource type="AudioStream" uid="uid://cqhd5bm768pej" path="res://Sounds/arcade-70780.mp3" id="9_h86fy"]
@@ -15,9 +14,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oy2ng"]
 size = Vector2(18.3233, 119)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4wx5"]
-size = Vector2(18.3232, 119)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x01v8"]
 size = Vector2(803.889, 20)
@@ -47,17 +43,7 @@ texture = ExtResource("3_81la5")
 position = Vector2(0.838348, -0.356293)
 shape = SubResource("RectangleShape2D_oy2ng")
 
-[node name="Computer" type="CharacterBody2D" parent="."]
-position = Vector2(-389.113, 0)
-collision_mask = 3
-script = ExtResource("5_p80kc")
-
-[node name="Sprite2D" type="Sprite2D" parent="Computer"]
-texture = ExtResource("4_vwvk0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Computer"]
-position = Vector2(-0.838379, -0.356293)
-shape = SubResource("RectangleShape2D_j4wx5")
+[node name="Computer" parent="." instance=ExtResource("5_q07eu")]
 
 [node name="Boundary" type="StaticBody2D" parent="."]
 position = Vector2(0, -236.574)
@@ -152,6 +138,32 @@ vertical_alignment = 1
 [node name="Countdown" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_mui0h")
 
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = -35.5072
+offset_top = -221.014
+offset_right = 39.4928
+offset_bottom = -181.014
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.729243, 0.50687, 0.379501, 1)
+theme_override_colors/font_pressed_color = Color(0.897391, 0.662878, 0.505876, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.95158, 0.95158, 0.95158, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.920907, 0.851741, 0.790522, 1)
+text = "RESTART"
+
 [connection signal="body_entered" from="GoalPostRight" to="." method="_on_goal_post_right_body_entered"]
 [connection signal="body_entered" from="GoalPostLeft" to="." method="_on_goal_post_left_body_entered"]
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

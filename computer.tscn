@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx0b56k0jno3c"]
+
+[ext_resource type="Script" path="res://Scenes/Computer.gd" id="1_jxr63"]
+[ext_resource type="Texture2D" uid="uid://b23kgirec6jvp" path="res://Assets/Computer.png" id="2_mh5rr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4wx5"]
+size = Vector2(18.3232, 119)
+
+[node name="Computer" type="CharacterBody2D"]
+position = Vector2(-389.113, 0)
+collision_mask = 3
+script = ExtResource("1_jxr63")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mh5rr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.838379, -0.356293)
+shape = SubResource("RectangleShape2D_j4wx5")

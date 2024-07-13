@@ -14,7 +14,9 @@ func _ready():
 func _process(delta):
 	$CountdownLabel.text = str(int($BallTimer.time_left) + 1)
 	
+
 	
+
 	
 
 	
@@ -23,7 +25,7 @@ func reset_speed():
 	new_player_speed = 0
 	$Player.speed = new_player_speed
 	new_computer_speed = 0
-	$Computer.speed = new_player_speed
+	$Computer.speed = new_computer_speed
 	
 		
 	
@@ -75,3 +77,7 @@ func _on_ball_timer_timeout():
 	$Ball.show()
 	$Ball.ball_movement = $Ball.random_direction()
 
+
+
+func _on_restart_pressed():
+	get_tree().reload_current_scene()

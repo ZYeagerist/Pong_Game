@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="Pong"
-run/main_scene="res://Scenes/world_scene.tscn"
+run/main_scene="res://Scenes/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+
+[autoload]
+
+GameSettings="*res://game_settings.gd"
 
 [input]
 

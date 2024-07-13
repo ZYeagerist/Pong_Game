@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 400
+var p_height : float
 
 
 
