@@ -11,6 +11,9 @@ var score = [0, 0]
 func _ready():
 	$BackgroundMusic.play()
 	
+func _process(delta):
+	$CountdownLabel.text = str(int($BallTimer.time_left) + 1)
+	
 	
 	
 
@@ -46,9 +49,9 @@ func _on_goal_post_right_body_entered(body):
 	$Ball.hide()
 	$Ball.ball_movement = Vector2.ZERO
 	$BallTimer.start()
-	$Countdown/Timer.start
 	reset_speed()
-	
+	$CountdownLabel.visible = true
+	$Countdown.play()
 
 func _on_goal_post_left_body_entered(body):
 	$Score.play()
@@ -60,20 +63,15 @@ func _on_goal_post_left_body_entered(body):
 	$Ball.hide()
 	$Ball.ball_movement = Vector2.ZERO
 	$BallTimer.start()
-	$Countdown/Timer.start
 	reset_speed()
-	
-
-
+	$CountdownLabel.visible = true
+	$Countdown.play()
 
 
 func _on_ball_timer_timeout():
-	_on_timer_timeout()
+	$CountdownLabel.visible = false
 	$Player.speed = 400
 	$Computer.speed = 400
 	$Ball.show()
 	$Ball.ball_movement = $Ball.random_direction()
 
-
-func _on_timer_timeout():
-	_on_ball_timer_timeout()
