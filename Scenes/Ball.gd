@@ -27,7 +27,7 @@ func _physics_process(delta):
 	var collider
 	if collision:
 		collider = collision.get_collider()
-		if collider == $"../Player" or collider == $"../Computer":
+		if collider == $"../Player" or collider == $"../Computer" or collider == $"../Boundary":
 			$"../PaddleHit".play()
 			ball_speed += ball_accel
 			ball_movement = ball_movement.bounce(collision.get_normal())
